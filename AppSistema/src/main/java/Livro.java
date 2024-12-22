@@ -4,11 +4,16 @@ public class Livro {
     private int ano_publicacao;
     private String status;
     
-    public Livro(int ID_Livro, String titulo, int ano_publicacao, String status){
+    private Autor autor;
+    private Editora editora;
+    
+    public Livro(int ID_Livro, String titulo, int ano_publicacao, String status, Autor autor, Editora editora){
         this.ID_Livro = ID_Livro;
         this.titulo = titulo;
         this.ano_publicacao = ano_publicacao;
         this.status = status;
+        this.autor = autor;
+        this.editora = editora;
     }
     
     public int getIdLivro(){
@@ -43,11 +48,20 @@ public class Livro {
         this.status = status;
     }
     
-    public void cadastrarLivro(String titulo, int ano_publicacao, String status){
+    public Autor getAutor(){
+        return autor;
+    }
+    
+    public void setAutor(Autor autor){
+        this.autor = autor;
+    }
+    
+    
+    public void cadastrarLivro(String titulo, int ano_publicacao, String status, Autor autor, Editora editora){
         
     }
     
-    public void alterarLivro(String titulo, int ano_publicacao, String status){
+    public void alterarLivro(String titulo, int ano_publicacao, String status, Autor autor, Editora editora){
         
     }
     

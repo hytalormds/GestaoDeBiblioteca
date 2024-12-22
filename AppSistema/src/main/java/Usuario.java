@@ -8,13 +8,16 @@ public class Usuario {
     private Date data_de_nascimento;
     private String sexo;
     
-    public Usuario(int ID_Usuario, String nome, String email, String telefone, Date data_de_nascimento, String sexo){
+    private Endereco endereco;
+    
+    public Usuario(int ID_Usuario, String nome, String email, String telefone, Date data_de_nascimento, String sexo, Endereco endereco){
         this.ID_Usuario = ID_Usuario;
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
         this.data_de_nascimento = data_de_nascimento;
         this.sexo = sexo;
+        this.endereco = endereco;
     }
     
     public int getIdUsuario(){
@@ -65,11 +68,19 @@ public class Usuario {
         this.sexo = sexo;
     }
     
-    public void cadastrarUsuario(String nome, String email, String telefone, Date data_de_nascimento, String sexo){
+    public Endereco getEndereco(){
+        return endereco;
+    }
+    
+    public void setEndereco(Endereco endereco){
+        this.endereco = endereco;
+    }
+    
+    public void cadastrarUsuario(String nome, String email, String telefone, Date data_de_nascimento, String sexo, Endereco endereco){
         
     }
     
-    public void alterarUsuario(String nome, String email, String telefone, Date data_de_nascimento, String sexo){
+    public void alterarUsuario(String nome, String email, String telefone, Date data_de_nascimento, String sexo, Endereco endereco){
         
     }
     
