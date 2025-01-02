@@ -31,7 +31,7 @@ public class Autor {
         
     }
     
-    public void exxcluirUsuario(int ID_Autor){
+    public void excluirUsuario(int ID_Autor){
         
     }
 }
