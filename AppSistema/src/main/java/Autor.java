@@ -26,7 +26,8 @@ public class Autor {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
+    
+    /*Inserir dados no sistema*/
     public void cadastrarAutor(String nome) {
         String insertQuery = "INSERT INTO Autor(nome) VALUES(?)";
 
@@ -50,7 +51,8 @@ public class Autor {
     public void alterarAutor(String nome) {
 
     }
-
+    
+    /* Exclusão por id do autor cadastrado */
     public void excluirAutor(int ID_Autor) {
         String deleteQuery = "DELETE FROM Autor WHERE ID_Autor = ?";
 
