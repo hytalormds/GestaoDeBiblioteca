@@ -1,22 +1,23 @@
-import java.util.Date;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 public class Usuario {
     private int ID_Usuario;
-    private String nome;
-    private String email;
-    private String telefone;
-    private Date data_de_nascimento;
-    private String sexo;
+    private String Nome;
+    private String Email;
+    private String Telefone;
+    private int Idade;
+    private String Sexo;
     
     private Endereco endereco;
     
-    public Usuario(int ID_Usuario, String nome, String email, String telefone, Date data_de_nascimento, String sexo, Endereco endereco){
+    public Usuario(int ID_Usuario, String nome, String email, String telefone, int idade, String sexo, Endereco endereco){
         this.ID_Usuario = ID_Usuario;
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
-        this.data_de_nascimento = data_de_nascimento;
-        this.sexo = sexo;
+        this.Nome = Nome;
+        this.Email = Email;
+        this.Telefone = Telefone;
+        this.Idade = Idade;
+        this.Sexo = Sexo;
         this.endereco = endereco;
     }
     
@@ -29,43 +30,43 @@ public class Usuario {
     }
     
     public String getNome(){
-        return nome;
+        return Nome;
     }
     
-    public void setNome(String nome){
-        this.nome = nome;
+    public void setNome(String Nome){
+        this.Nome = Nome;
     }
     
     public String getEmail(){
-        return email;
+        return Email;
     }
     
-    public void setEmail(String email){
-        this.email = email;
+    public void setEmail(String Email){
+        this.Email = Email;
     }
     
     public String getTelefone(){
-        return telefone;
+        return Telefone;
     }
     
-    public void setTelefone(String telefone){
-        this.telefone = telefone;
+    public void setTelefone(String Telefone){
+        this.Telefone = Telefone;
     }
     
-    public Date getDataDeNascimento(){
-        return data_de_nascimento;
+    public int getIdade(){
+        return Idade;
     }
     
-    public void setDataDeNascimento(){
-        this.data_de_nascimento = data_de_nascimento;
+    public void setIdade(){
+        this.Idade = Idade;
     }
     
     public String getSexo(){
-        return sexo;
+        return Sexo;
     }
     
-    public void setSexo(String sexo){
-        this.sexo = sexo;
+    public void setSexo(String Sexo){
+        this.Sexo = Sexo;
     }
     
     public Endereco getEndereco(){
@@ -76,16 +77,53 @@ public class Usuario {
         this.endereco = endereco;
     }
     
-    public void cadastrarUsuario(String nome, String email, String telefone, Date data_de_nascimento, String sexo, Endereco endereco){
+    public void cadastrarUsuario(String Nome, String Email, String Telefone, int Idade, String Sexo, Endereco endereco){
+        String insertQuery = "INSERT INTO Usuario (Nome, Email, Telefone, Idade, Sexo, ID_Endereco) VALUES (?, ?, ?, ?, ?, ?)";
         
+        try(Connection connection = Conexao.getConexao(); PreparedStatement preparedStatement 
+                = connection.prepareStatement(insertQuery)){
+            
+            preparedStatement.setString(1, Nome);
+            preparedStatement.setString(2, Email);
+            preparedStatement.setString(3, Telefone);
+            preparedStatement.setInt(4, Idade);
+            preparedStatement.setString(5, Sexo);
+            preparedStatement.setInt(6, endereco.getIdEndereco());
+            
+            int rowsAffected = preparedStatement.executeUpdate();
+            
+            if(rowsAffected > 0){
+                System.out.println("Usuario cadastrado!");
+            }else{
+                System.out.println("Usuario não cadastrado");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
     
-    public void alterarUsuario(String nome, String email, String telefone, Date data_de_nascimento, String sexo, Endereco endereco){
+    public void alterarUsuario(String Nome, String Email, String Telefone, int Idade, String Sexo, Endereco endereco){
         
     }
     
     public void excluirUsuario(int ID_Usuario){
+        String deleteQuery = "DELETE FROM Usuario WHERE Id_Usuario = ?";
         
+        try(Connection connection = Conexao.getConexao(); PreparedStatement preparedStatement 
+                = connection.prepareStatement(deleteQuery)){
+            
+            preparedStatement.setInt(1, ID_Usuario);
+            
+            int rowsAffected = preparedStatement.executeUpdate();
+            
+            if(rowsAffected > 0){
+                System.out.println("Usuario excluido!");
+            }else{
+                System.out.println("Usuario não excluido!");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
     
     public String pesquisarUsuario(String nome){
