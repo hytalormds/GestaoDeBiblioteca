@@ -54,6 +54,8 @@ public class Autor {
         try(Connection connection = Conexao.getConexao(); PreparedStatement preparedStatement 
                 = connection.prepareStatement(updateQuery)){
             
+            /* Necessário colocar o ID também */
+            
             preparedStatement.setString(1, nome);
             preparedStatement.setInt(2, ID_Autor);
             
