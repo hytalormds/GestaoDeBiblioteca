@@ -102,8 +102,29 @@ public class Usuario {
         }
     }
     
-    public void alterarUsuario(String Nome, String Email, String Telefone, int Idade, String Sexo, Endereco endereco){
+    public void alterarUsuario(int ID_Usuario, String Nome, String Email, String Telefone, int Idade, String Sexo, Endereco endereco){
+        String updateQuery = "UPDATE Usuario SET Nome = ?, Email = ?, Telefone = ?, Idade = ?, Sexo = ?, ID_Endereco = ? WHERE ID_Usuario = ?";
         
+        try(Connection connection = Conexao.getConexao(); PreparedStatement preparedStatement 
+                = connection.prepareStatement(updateQuery)){
+            
+            preparedStatement.setString(1, Nome);
+            preparedStatement.setString(2, Email);
+            preparedStatement.setString(3, Telefone);
+            preparedStatement.setInt(4, Idade);
+            preparedStatement.setString(5, Sexo);
+            preparedStatement.setInt(6, endereco.getIdEndereco());
+            
+            int rowsAffected = preparedStatement.executeUpdate();
+            
+            if(rowsAffected > 0){
+                System.out.println("Usuario atualizado!");
+            }else{
+                System.out.println("Usuario não atualizado!");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
     
     public void excluirUsuario(int ID_Usuario){
