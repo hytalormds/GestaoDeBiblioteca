@@ -113,8 +113,8 @@ public class Emprestimo {
         }
     }
 
-    public void alterarEmprestimo(Date Data_Emprestimo, Date Data_Devolucao, int Qtd_Livros, Usuario usuario, Livro livro) {
-
+    public void alterarEmprestimo(int ID_Emprestimo, Date Data_Emprestimo, Date Data_Devolucao, int Qtd_Livros, Usuario usuario, Livro livro) {
+        String updateQuery = "UPDATE Emprestimo SET Data_Emprestimo = ?, ";
     }
 
     public void excluirEmprestimo(int ID_Emprestimo) {
