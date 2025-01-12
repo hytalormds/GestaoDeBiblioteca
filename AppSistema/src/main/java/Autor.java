@@ -48,8 +48,27 @@ public class Autor {
         }
     }
 
-    public void alterarAutor(String nome) {
-
+    public void alterarAutor(int ID_Autor, String nome) {
+        String updateQuery = "UPDATE Autor SET nome = ? WHERE ID_Autor = ?";
+        
+        try(Connection connection = Conexao.getConexao(); PreparedStatement preparedStatement 
+                = connection.prepareStatement(updateQuery)){
+            
+            /* Necessário colocar o ID também */
+            
+            preparedStatement.setString(1, nome);
+            preparedStatement.setInt(2, ID_Autor);
+            
+            int rowsAffected = preparedStatement.executeUpdate();
+            
+            if(rowsAffected > 0){
+                System.out.println("Autor Atualizado!");
+            }else{
+                System.out.println("Autor não atualizado!");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
     
     /* Exclusão por id do autor cadastrado */
