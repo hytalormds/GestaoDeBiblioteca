@@ -46,8 +46,25 @@ public class Editora {
         }
     }
     
-    public void alterarEditora(String nome){
+    public void alterarEditora(int ID_Editora, String nome){
+        String updateQuery = "UPDATE Editora SET nome = ? WHERE ID_Editora";
         
+        try(Connection connection = Conexao.getConexao(); PreparedStatement preparedStatement 
+                = connection.prepareStatement(updateQuery)){
+            
+            preparedStatement.setString(1, nome);
+            preparedStatement.setInt(2, ID_Editora);
+            
+            int rowsAffected = preparedStatement.executeUpdate();
+            
+            if(rowsAffected > 0){
+                System.out.println("Editora atualizada!");
+            }else{
+                System.out.println("Editora não atualizada");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
     
     public void excluirEditora(int ID_Editora){
