@@ -69,8 +69,27 @@ public class Endereco {
         }
     }
 
-    public void alterarEndereco(String Rua, int Numero, String Referencia) {
+    public void alterarEndereco(int ID_Endereco, String Rua, int Numero, String Referencia) {
+        String updateQuery = "UPDATE Endereco SET Rua = ?, Numero = ?, Referencia = ? WHERE ID_Endereco = ?";
 
+        try (Connection connection = Conexao.getConexao(); PreparedStatement preparedStatement
+                = connection.prepareStatement(updateQuery)) {
+
+            preparedStatement.setString(1, Rua);
+            preparedStatement.setInt(2, Numero);
+            preparedStatement.setString(3, Referencia);
+            preparedStatement.setInt(4, ID_Endereco);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Endereco atualizado!");
+            } else {
+                System.out.println("Endereco não atualizado");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void excluirEndereco(int ID_Endereco) {
