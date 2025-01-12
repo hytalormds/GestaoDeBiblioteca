@@ -84,8 +84,29 @@ public class Livro {
         }
     }
     
-    public void alterarLivro(String Titulo, int Ano_Publicacao, String Status, Autor autor, Editora editora){
+    public void alterarLivro(int ID_Livro, String Titulo, int Ano_Publicacao, String Status, Autor autor, Editora editora){
+        String updateQuery = "UPDATE Livros SET Titulo = ?, Ano_Publicacao = ?, Status = ?, ID_Autor = ?, ID_Editora = ? WHERE ID_Livro = ?";
         
+        try(Connection connection = Conexao.getConexao(); PreparedStatement preparedStatement 
+                = connection.prepareStatement(updateQuery)){
+            
+            preparedStatement.setString(1, Titulo);
+            preparedStatement.setInt(2, Ano_Publicacao);
+            preparedStatement.setString(3, Status);
+            preparedStatement.setInt(4, autor.getIdAutor());
+            preparedStatement.setInt(5, editora.getIdEditora());
+            preparedStatement.setInt(6, ID_Livro);
+            
+            int rowsAffected = preparedStatement.executeUpdate();
+            
+            if(rowsAffected > 0){
+                System.out.println("Livro atualizado!");
+            }else{
+                System.out.println("Livro não atualizado!");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
     
     public void excluirLivro(int ID_Livro){
