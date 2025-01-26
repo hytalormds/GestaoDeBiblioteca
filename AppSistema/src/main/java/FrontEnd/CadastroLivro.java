@@ -4,6 +4,10 @@
  */
 package FrontEnd;
 
+import BackEnd.Autor;
+import BackEnd.Editora;
+import BackEnd.Livro;
+
 /**
  *
  * @author hytal
@@ -231,6 +235,11 @@ public class CadastroLivro extends javax.swing.JInternalFrame {
         btnCadLv.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCadLv.setForeground(new java.awt.Color(0, 0, 0));
         btnCadLv.setText("Cadastrar");
+        btnCadLv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadLvActionPerformed(evt);
+            }
+        });
 
         btnAltLv.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnAltLv.setForeground(new java.awt.Color(0, 0, 0));
@@ -371,6 +380,15 @@ public class CadastroLivro extends javax.swing.JInternalFrame {
     private void cadPbLvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadPbLvActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cadPbLvActionPerformed
+
+    private void btnCadLvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadLvActionPerformed
+        String Titulo = cadTtLv.getText();
+        String Ano_Publicacao = cadPbLv.getText();
+        String ID_Autor = cadIdAtLv.getText();
+        String ID_Editora = cadIdEdLv.getText();
+
+        Livro novoLivro = new Livro(Titulo, Ano_Publicacao, ID_Autor, ID_Editora);
+    }//GEN-LAST:event_btnCadLvActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

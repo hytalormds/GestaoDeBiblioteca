@@ -42,7 +42,7 @@ public class Editora {
             if(rowsAffected > 0){
                 System.out.println("Editora cadastrada!");
             }else{
-                System.out.println("Autor não cadastrado!");
+                System.out.println("Editora não cadastrado!");
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -83,7 +83,7 @@ public class Editora {
             if(rowsAffected > 0){
                 System.out.println("Editora excluida!");
             }else{
-                System.out.println("Editora não excluuida!");
+                System.out.println("Editora não excluida!");
             }
         }catch(Exception e){
             e.printStackTrace();

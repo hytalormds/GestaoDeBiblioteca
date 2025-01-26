@@ -10,16 +10,14 @@ public class Livro {
     private int ID_Livro;
     private String Titulo;
     private int Ano_Publicacao;
-    private String Status;
     
     private Autor autor;
     private Editora editora;
     
-    public Livro(int ID_Livro, String Titulo, int Ano_Publicacao, String Status, Autor autor, Editora editora){
+    public Livro(int ID_Livro, String Titulo, int Ano_Publicacao, Autor autor, Editora editora){
         this.ID_Livro = ID_Livro;
         this.Titulo = Titulo;
         this.Ano_Publicacao = Ano_Publicacao;
-        this.Status = Status;
         this.autor = autor;
         this.editora = editora;
     }
@@ -48,14 +46,6 @@ public class Livro {
         this.Ano_Publicacao = Ano_Publicacao;
     }
     
-    public String getStatus(){
-        return Status;
-    }
-    
-    public void setStatus(String Status){
-        this.Status = Status;
-    }
-    
     public Autor getAutor(){
         return autor;
     }
@@ -65,15 +55,14 @@ public class Livro {
     }
     
     
-    public void cadastrarLivro(String Titulo, int Ano_Publicacao, String Status, Autor autor, Editora editora){
-        String insertQuery = "INSERT INTO Livros(Titulo, Ano_Publicacao, Status, ID_Autor, ID_Editora) VALUES(?, ?, ?, ?, ?)";
+    public void cadastrarLivro(String Titulo, int Ano_Publicacao, Autor autor, Editora editora){
+        String insertQuery = "INSERT INTO Livros(Titulo, Ano_Publicacao, ID_Autor, ID_Editora) VALUES(?, ?, ?, ?)";
         
         try(Connection connection = Conexao.getConexao(); PreparedStatement preparedStatement 
                 = connection.prepareStatement (insertQuery)){
             
             preparedStatement.setString(1, Titulo);
             preparedStatement.setInt(2, Ano_Publicacao);
-            preparedStatement.setString(3, Status);
             preparedStatement.setInt(4, autor.getIdAutor());
             preparedStatement.setInt(5, editora.getIdEditora());
             
@@ -82,22 +71,21 @@ public class Livro {
             if(rowsAffected > 0){
                 System.out.println("Livro cadastrado!");
             }else{
-                System.out.println("Livro não excluido!");
+                System.out.println("Livro não cadastrado!");
             }
         }catch(Exception e){
             e.printStackTrace();
         }
     }
     
-    public void alterarLivro(int ID_Livro, String Titulo, int Ano_Publicacao, String Status, Autor autor, Editora editora){
-        String updateQuery = "UPDATE Livros SET Titulo = ?, Ano_Publicacao = ?, Status = ?, ID_Autor = ?, ID_Editora = ? WHERE ID_Livro = ?";
+    public void alterarLivro(int ID_Livro, String Titulo, int Ano_Publicacao, Autor autor, Editora editora){
+        String updateQuery = "UPDATE Livros SET Titulo = ?, Ano_Publicacao = ?, ID_Autor = ?, ID_Editora = ? WHERE ID_Livro = ?";
         
         try(Connection connection = Conexao.getConexao(); PreparedStatement preparedStatement 
                 = connection.prepareStatement(updateQuery)){
             
             preparedStatement.setString(1, Titulo);
             preparedStatement.setInt(2, Ano_Publicacao);
-            preparedStatement.setString(3, Status);
             preparedStatement.setInt(4, autor.getIdAutor());
             preparedStatement.setInt(5, editora.getIdEditora());
             preparedStatement.setInt(6, ID_Livro);
@@ -127,7 +115,7 @@ public class Livro {
             if(rowsAffected > 0){
                 System.out.println("Livro excluido!");
             }else{
-                System.out.println("Livro não escluido!");
+                System.out.println("Livro não excluido!");
             }
         }catch(Exception e){
             e.printStackTrace();
