@@ -1,3 +1,8 @@
+package BackEnd;
+
+import Conecta.Conexao;
+import BackEnd.Editora;
+import BackEnd.Autor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 

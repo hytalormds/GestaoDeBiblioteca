@@ -1,3 +1,7 @@
+package BackEnd;
+
+import BackEnd.Endereco;
+import Conecta.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
